@@ -1,0 +1,109 @@
+Organizations:
+  - &OrdererOrg
+    Name: Orderer
+    ID: OrdererMSP
+    MSPDir: crypto-config/ordererOrganizations/reliance-network.com/msp
+
+  - &RelianceInfrastructure
+    Name: RelianceInfrastructureMSP
+    ID: RelianceInfrastructureMSP
+    MSPDir: crypto-config/peerOrganizations/infrastructure.reliance-network.com/msp
+    AnchorPeers:
+      - Host: peer0.infrastructure.reliance-network.com
+        Port: 7051
+
+  - &ReliancePower
+    Name: ReliancePowerMSP
+    ID: ReliancePowerMSP
+    MSPDir: crypto-config/peerOrganizations/power.reliance-network.com/msp
+    AnchorPeers:
+      - Host: peer0.power.reliance-network.com
+        Port: 9051
+
+  - &RelianceCommunications
+    Name: RelianceCommunicationsMSP
+    ID: RelianceCommunicationsMSP
+    MSPDir: crypto-config/peerOrganizations/communications.reliance-network.com/msp
+    AnchorPeers:
+      - Host: peer0.communications.reliance-network.com
+        Port: 11051
+
+  - &RelianceEntertainment
+    Name: RelianceEntertainmentMSP
+    ID: RelianceEntertainmentMSP
+    MSPDir: crypto-config/peerOrganizations/entertainment.reliance-network.com/msp
+    AnchorPeers:
+      - Host: peer0.entertainment.reliance-network.com
+        Port: 13051
+
+  - &RelianceCapital
+    Name: RelianceCapitalMSP
+    ID: RelianceCapitalMSP
+    MSPDir: crypto-config/peerOrganizations/capital.reliance-network.com/msp
+    AnchorPeers:
+      - Host: peer0.capital.reliance-network.com
+        Port: 15051
+
+#Capabilities
+
+Capabilities:
+  Channel: &ChannelCapabilities
+    V1_3: true
+  Orderer: &OrdererCapabilities
+    V1_1: true
+  Application: &ApplicationCapabilities
+    V1_3: true
+
+#Application
+
+Application: &ApplicationDefaults
+  Organizations:
+
+#Orderer
+Orderer: &OrdererDefaults
+  OrdererType: solo
+  Addresses:
+    - orderer.reliance-network.com:7050
+  BatchTimeout: 5s
+  BatchSize:
+    MaxMessageCount: 10
+    AbsoluteMaxBytes: 256 MB
+    PreferredMaxBytes: 512 KB
+  Kafka:
+    Brokers:
+      - 127.0.0.1:9092
+  Organizations:
+
+
+#Profiles
+Profiles:
+  OrdererGenesis:
+    Capabilities:
+      <<: *ChannelCapabilities
+    Orderer:
+      <<: *OrdererDefaults
+      Organizations:
+        - *OrdererOrg
+      Capabilities:
+        <<: *OrdererCapabilities
+    Consortiums:
+      RelianceConsortium:
+        Organizations:
+          - *RelianceInfrastructure
+          - *ReliancePower
+          - *RelianceCommunications
+          - *RelianceEntertainment
+          - *RelianceCapital
+
+  RelianceOrgs:
+    Consortium: RelianceConsortium
+    Application:
+      <<: *ApplicationDefaults
+      Organizations:
+        - *RelianceInfrastructure
+        - *ReliancePower
+        - *RelianceCommunications
+        - *RelianceEntertainment
+        - *RelianceCapital
+      Capabilities:
+        <<: *ApplicationCapabilities

@@ -1,0 +1,262 @@
+version: '2'
+
+volumes:
+  orderer.reliance-network.com:
+  peer0.infrastructure.reliance-network.com:
+  peer1.infrastructure.reliance-network.com:
+  peer0.power.reliance-network.com:
+  peer1.power.reliance-network.com:
+  peer0.communications.reliance-network.com:
+  peer1.communications.reliance-network.com:
+  peer0.entertainment.reliance-network.com:
+  peer1.entertainment.reliance-network.com:
+  peer0.capital.reliance-network.com:
+  peer1.capital.reliance-network.com:
+
+networks:
+  byfn:
+
+services:
+
+  ca.infrastructure.reliance-network.com:
+    image: hyperledger/fabric-ca:latest
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.infrastructure.reliance-network.com
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.infrastructure.reliance-network.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/9295bc208a5426786ce9514b5483a2a9855926f0131b8c19787e17634dc5f9fe_sk
+    ports:
+      - "7054:7054"
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.infrastructure.reliance-network.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/9295bc208a5426786ce9514b5483a2a9855926f0131b8c19787e17634dc5f9fe_sk -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/infrastructure.reliance-network.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.infrastructure.reliance-network.com
+    networks:
+      - byfn
+
+  ca.power.reliance-network.com:
+    image: hyperledger/fabric-ca:latest
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.power.reliance-network.com
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.power.reliance-network.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/84d269316f17e683972da1b33f3bdfb9462d708c44e6b59dbd959416438e4850_sk
+    ports:
+      - "8054:7054"
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.power.reliance-network.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/84d269316f17e683972da1b33f3bdfb9462d708c44e6b59dbd959416438e4850_sk -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/power.reliance-network.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.power.reliance-network.com
+    networks:
+      - byfn
+
+  ca.communications.reliance-network.com:
+    image: hyperledger/fabric-ca:latest
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.communications.reliance-network.com
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.communications.reliance-network.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/4ed96fa4cfa60d217b83303e6bf51416e8bc1289b9fea6013c2837204ef8fff5_sk
+    ports:
+      - "9054:7054"
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.communications.reliance-network.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/4ed96fa4cfa60d217b83303e6bf51416e8bc1289b9fea6013c2837204ef8fff5_sk -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/communications.reliance-network.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.communications.reliance-network.com
+    networks:
+      - byfn
+
+  ca.entertainment.reliance-network.com:
+    image: hyperledger/fabric-ca:latest
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.entertainment.reliance-network.com
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.entertainment.reliance-network.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/168014e1c0c97e4b6a08d47143ba0f8ba5219b7a80e525d7c94941536c720f0e_sk
+    ports:
+      - "10054:7054"
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.entertainment.reliance-network.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/168014e1c0c97e4b6a08d47143ba0f8ba5219b7a80e525d7c94941536c720f0e_sk -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/entertainment.reliance-network.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.entertainment.reliance-network.com
+    networks:
+      - byfn
+
+  ca.capital.reliance-network.com:
+    image: hyperledger/fabric-ca:latest
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.capital.reliance-network.com
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.capital.reliance-network.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/c70c3fb429d1a056934dd49199c377313f4188ef11e78a64e836478f6a7b00e2_sk
+    ports:
+      - "11054:7054"
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.capital.reliance-network.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/c70c3fb429d1a056934dd49199c377313f4188ef11e78a64e836478f6a7b00e2_sk -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/capital.reliance-network.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.capital.reliance-network.com
+    networks:
+      - byfn
+
+  orderer.reliance-network.com:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer.reliance-network.com
+    container_name: orderer.reliance-network.com
+    networks:
+      - byfn
+
+  peer0.infrastructure.reliance-network.com:
+    container_name: peer0.infrastructure.reliance-network.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.infrastructure.reliance-network.com
+    networks:
+      - byfn
+
+  peer1.infrastructure.reliance-network.com:
+    container_name: peer1.infrastructure.reliance-network.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.infrastructure.reliance-network.com
+    networks:
+      - byfn
+
+  peer0.power.reliance-network.com:
+    container_name: peer0.power.reliance-network.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.power.reliance-network.com
+    networks:
+      - byfn
+
+  peer1.power.reliance-network.com:
+    container_name: peer1.power.reliance-network.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.power.reliance-network.com
+    networks:
+      - byfn
+
+  peer0.communications.reliance-network.com:
+    container_name: peer0.communications.reliance-network.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.communications.reliance-network.com
+    networks:
+      - byfn
+
+  peer1.communications.reliance-network.com:
+    container_name: peer1.communications.reliance-network.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.communications.reliance-network.com
+    networks:
+      - byfn
+
+  peer0.entertainment.reliance-network.com:
+    container_name: peer0.entertainment.reliance-network.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.entertainment.reliance-network.com
+    networks:
+      - byfn
+
+  peer1.entertainment.reliance-network.com:
+    container_name: peer1.entertainment.reliance-network.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.entertainment.reliance-network.com
+    networks:
+      - byfn
+
+  peer0.capital.reliance-network.com:
+    container_name: peer0.capital.reliance-network.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.capital.reliance-network.com
+    networks:
+      - byfn
+
+  peer1.capital.reliance-network.com:
+    container_name: peer1.capital.reliance-network.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.capital.reliance-network.com
+    networks:
+      - byfn
+
+  cli:
+    container_name: cli
+    image: hyperledger/fabric-tools:latest
+    tty: true
+    stdin_open: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - FABRIC_LOGGING_SPEC=INFO
+      - CORE_PEER_ID=cli
+      - CORE_PEER_ADDRESS=peer0.infrastructure.reliance-network.com:7051
+      - CORE_PEER_LOCALMSPID=RelianceInfrastructureMSP
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/infrastructure.reliance-network.com/peers/peer0.infrastructure.reliance-network.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/infrastructure.reliance-network.com/peers/peer0.infrastructure.reliance-network.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/infrastructure.reliance-network.com/peers/peer0.infrastructure.reliance-network.com/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/infrastructure.reliance-network.com/users/Admin@infrastructure.reliance-network.com/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: /bin/bash
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./chaincode/:/opt/gopath/src/github.com/hyperledger/fabric/peer/chaincode/
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+      - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+      - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
+    depends_on:
+      - ca.infrastructure.reliance-network.com
+      - ca.power.reliance-network.com
+      - ca.communications.reliance-network.com
+      - ca.entertainment.reliance-network.com
+      - ca.capital.reliance-network.com
+      - orderer.reliance-network.com
+      - peer0.infrastructure.reliance-network.com
+      - peer1.infrastructure.reliance-network.com
+      - peer0.power.reliance-network.com
+      - peer1.power.reliance-network.com
+      - peer0.communications.reliance-network.com
+      - peer1.communications.reliance-network.com
+      - peer0.entertainment.reliance-network.com
+      - peer1.entertainment.reliance-network.com
+      - peer0.capital.reliance-network.com
+      - peer1.capital.reliance-network.com
+    networks:
+      - byfn
+
+  chaincode:
+    container_name: chaincode
+    image: hyperledger/fabric-ccenv:latest
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - FABRIC_LOGGING_SPEC=INFO
+      - CORE_PEER_ID=chaincode
+      - CORE_PEER_ADDRESS=peer0.infrastructure.reliance-network.com:7051
+      - CORE_PEER_LOCALMSPID=RelianceInfrastructureMSP
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/infrastructure.reliance-network.com/users/Admin@infrastructure.reliance-network.com/msp
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_TLS_CLIENT_KEY_PATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/infrastructure.reliance-network.com/users/Admin@infrastructure.reliance-network.com/tls/client.key
+      - CORE_TLS_CLIENT_CERT_PATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/infrastructure.reliance-network.com/users/Admin@infrastructure.reliance-network.com/tls/client.crt
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/infrastructure.reliance-network.com/users/Admin@infrastructure.reliance-network.com/tls/ca.crt
+    working_dir: /opt/gopath/src/chaincode
+    command: /bin/bash -c 'sleep 6000000'
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./msp:/etc/hyperledger/msp
+      - ./chaincode:/opt/gopath/src/chaincode
+    networks:
+      - byfn

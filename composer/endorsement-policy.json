@@ -1,0 +1,53 @@
+{
+  "identities": [
+    {
+      "role": {
+        "name": "member",
+        "mspId": "RelianceInfrastructureMSP"
+      }
+    },
+    {
+      "role": {
+        "name": "member",
+        "mspId": "ReliancePowerMSP"
+      }
+    },
+    {
+      "role": {
+        "name": "member",
+        "mspId": "RelianceCommunicationsMSP"
+      }
+    },
+    {
+      "role": {
+        "name": "member",
+        "mspId": "RelianceEntertainmentMSP"
+      }
+    },
+    {
+      "role": {
+        "name": "member",
+        "mspId": "RelianceCapitalMSP"
+      }
+    }
+  ],
+  "policy": {
+    "1-of": [
+      {
+        "signed-by": 0
+      },
+      {
+        "signed-by": 1
+      },
+      {
+        "signed-by": 2
+      },
+      {
+        "signed-by": 3
+      },
+      {
+        "signed-by": 4
+      }
+    ]
+  }
+}

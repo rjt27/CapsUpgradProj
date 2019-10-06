@@ -1,0 +1,248 @@
+---
+#
+# The network connection profile provides client applications the information about the target
+# blockchain network that are necessary for the applications to interact with it. These are all
+# knowledge that must be acquired from out-of-band sources. This file provides such a source.
+#
+name: "reliance-network_byfn"
+
+x-type: "hlfv1"
+
+description: "Reliance Asset Tracking Network"
+
+version: "1.0.0"
+
+client:
+  organization: RelianceInfrastructure
+  connection:
+    timeout:
+      peer:
+        endorser: 300
+        eventHub: 300
+        eventReg: 300
+      orderer: 300
+
+channels:
+  channelreliance:
+    orderers:
+      - orderer.reliance-network.com
+    peers:
+      peer0.infrastructure.reliance-network.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      peer1.infrastructure.reliance-network.com:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer0.power.reliance-network.com:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer1.power.reliance-network.com:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer0.communications.reliance-network.com:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer1.communications.reliance-network.com:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer0.entertainment.reliance-network.com:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer1.entertainment.reliance-network.com:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer0.capital.reliance-network.com:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer1.capital.reliance-network.com:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+
+organizations:
+  RelianceInfrastructure:
+    mspid: RelianceInfrastructureMSP
+    peers:
+      - peer0.infrastructure.reliance-network.com
+      - peer1.infrastructure.reliance-network.com
+    certificateAuthorities:
+      - ca.infrastructure.reliance-network.com
+  ReliancePower:
+    mspid: ReliancePowerMSP
+    peers:
+      - peer0.power.reliance-network.com
+      - peer1.power.reliance-network.com
+    certificateAuthorities:
+      - ca.power.reliance-network.com
+  RelianceCommunications:
+    mspid: RelianceCommunicationsMSP
+    peers:
+      - peer0.communications.reliance-network.com
+      - peer1.communications.reliance-network.com
+    certificateAuthorities:
+      - ca.communications.reliance-network.com
+  RelianceEntertainment:
+    mspid: RelianceEntertainmentMSP
+    peers:
+      - peer0.entertainment.reliance-network.com
+      - peer1.entertainment.reliance-network.com
+    certificateAuthorities:
+      - ca.entertainment.reliance-network.com
+  RelianceCapital:
+    mspid: RelianceCapitalMSP
+    peers:
+      - peer0.capital.reliance-network.com
+      - peer1.capital.reliance-network.com
+    certificateAuthorities:
+      - ca.capital.reliance-network.com
+
+orderers:
+  orderer.reliance-network.com:
+    url: grpcs://localhost:7050
+    grpcOptions:
+      ssl-target-name-override: orderer.reliance-network.com
+    tlsCACerts:
+      path: /home/rajat/ethApp/HyperLedger/workspace/fabric-samples/caps_proj/crypto-config/ordererOrganizations/reliance-network.com/orderers/orderer.reliance-network.com/msp/tlscacerts/tlsca.reliance-network.com-cert.pem
+
+peers:
+  peer0.infrastructure.reliance-network.com:
+    url: grpcs://localhost:7051
+    grpcOptions:
+      ssl-target-name-override: peer0.infrastructure.reliance-network.com
+      request-timeout: 120001
+    tlsCACerts:
+      path: /home/rajat/ethApp/HyperLedger/workspace/fabric-samples/caps_proj/crypto-config/peerOrganizations/infrastructure.reliance-network.com/peers/peer0.infrastructure.reliance-network.com/msp/tlscacerts/tlsca.infrastructure.reliance-network.com-cert.pem
+  peer1.infrastructure.reliance-network.com:
+    url: grpcs://localhost:8051
+    grpcOptions:
+      ssl-target-name-override: peer1.infrastructure.reliance-network.com
+      request-timeout: 120001
+    tlsCACerts:
+      path: /home/rajat/ethApp/HyperLedger/workspace/fabric-samples/caps_proj/crypto-config/peerOrganizations/infrastructure.reliance-network.com/peers/peer1.infrastructure.reliance-network.com/msp/tlscacerts/tlsca.infrastructure.reliance-network.com-cert.pem
+  peer0.power.reliance-network.com:
+    url: grpcs://localhost:9051
+    grpcOptions:
+      ssl-target-name-override: peer0.power.reliance-network.com
+      request-timeout: 120001
+    tlsCACerts:
+      path: /home/rajat/ethApp/HyperLedger/workspace/fabric-samples/caps_proj/crypto-config/peerOrganizations/power.reliance-network.com/peers/peer0.power.reliance-network.com/msp/tlscacerts/tlsca.power.reliance-network.com-cert.pem
+  peer1.power.reliance-network.com:
+    url: grpcs://localhost:10051
+    grpcOptions:
+      ssl-target-name-override: peer1.power.reliance-network.com
+      request-timeout: 120001
+    tlsCACerts:
+      path: /home/rajat/ethApp/HyperLedger/workspace/fabric-samples/caps_proj/crypto-config/peerOrganizations/power.reliance-network.com/peers/peer1.power.reliance-network.com/msp/tlscacerts/tlsca.power.reliance-network.com-cert.pem
+  peer0.communications.reliance-network.com:
+    url: grpcs://localhost:11051
+    grpcOptions:
+      ssl-target-name-override: peer0.communications.reliance-network.com
+      request-timeout: 120001
+    tlsCACerts:
+      path: /home/rajat/ethApp/HyperLedger/workspace/fabric-samples/caps_proj/crypto-config/peerOrganizations/communications.reliance-network.com/peers/peer0.communications.reliance-network.com/msp/tlscacerts/tlsca.communications.reliance-network.com-cert.pem
+  peer1.communications.reliance-network.com:
+    url: grpcs://localhost:12051
+    grpcOptions:
+      ssl-target-name-override: peer1.communications.reliance-network.com
+      request-timeout: 120001
+    tlsCACerts:
+      path: /home/rajat/ethApp/HyperLedger/workspace/fabric-samples/caps_proj/crypto-config/peerOrganizations/communications.reliance-network.com/peers/peer1.communications.reliance-network.com/msp/tlscacerts/tlsca.communications.reliance-network.com-cert.pem
+  peer0.entertainment.reliance-network.com:
+    url: grpcs://localhost:13051
+    grpcOptions:
+      ssl-target-name-override: peer0.entertainment.reliance-network.com
+      request-timeout: 120001
+    tlsCACerts:
+      path: /home/rajat/ethApp/HyperLedger/workspace/fabric-samples/caps_proj/crypto-config/peerOrganizations/entertainment.reliance-network.com/peers/peer0.entertainment.reliance-network.com/msp/tlscacerts/tlsca.entertainment.reliance-network.com-cert.pem
+  peer1.entertainment.reliance-network.com:
+    url: grpcs://localhost:14051
+    grpcOptions:
+      ssl-target-name-override: peer1.entertainment.reliance-network.com
+      request-timeout: 120001
+    tlsCACerts:
+      path: /home/rajat/ethApp/HyperLedger/workspace/fabric-samples/caps_proj/crypto-config/peerOrganizations/entertainment.reliance-network.com/peers/peer1.entertainment.reliance-network.com/msp/tlscacerts/tlsca.entertainment.reliance-network.com-cert.pem
+  peer0.capital.reliance-network.com:
+    url: grpcs://localhost:15051
+    grpcOptions:
+      ssl-target-name-override: peer0.capital.reliance-network.com
+      request-timeout: 120001
+    tlsCACerts:
+      path: /home/rajat/ethApp/HyperLedger/workspace/fabric-samples/caps_proj/crypto-config/peerOrganizations/capital.reliance-network.com/peers/peer0.capital.reliance-network.com/msp/tlscacerts/tlsca.capital.reliance-network.com-cert.pem
+  peer1.capital.reliance-network.com:
+    url: grpcs://localhost:16051
+    grpcOptions:
+      ssl-target-name-override: peer1.capital.reliance-network.com
+      request-timeout: 120001
+    tlsCACerts:
+      path: /home/rajat/ethApp/HyperLedger/workspace/fabric-samples/caps_proj/crypto-config/peerOrganizations/capital.reliance-network.com/peers/peer1.capital.reliance-network.com/msp/tlscacerts/tlsca.capital.reliance-network.com-cert.pem
+
+certificateAuthorities:
+  ca.infrastructure.reliance-network.com:
+    url: https://localhost:7054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: /home/rajat/ethApp/HyperLedger/workspace/fabric-samples/caps_proj/crypto-config/peerOrganizations/infrastructure.reliance-network.com/ca/ca.infrastructure.reliance-network.com-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.infrastructure.reliance-network.com
+  ca.power.reliance-network.com:
+    url: https://localhost:8054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: /home/rajat/ethApp/HyperLedger/workspace/fabric-samples/caps_proj/crypto-config/peerOrganizations/power.reliance-network.com/ca/ca.power.reliance-network.com-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.power.reliance-network.com
+  ca.communications.reliance-network.com:
+    url: https://localhost:9054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: /home/rajat/ethApp/HyperLedger/workspace/fabric-samples/caps_proj/crypto-config/peerOrganizations/communications.reliance-network.com/ca/ca.communications.reliance-network.com-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.communications.reliance-network.com
+  ca.entertainment.reliance-network.com:
+    url: https://localhost:10054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: /home/rajat/ethApp/HyperLedger/workspace/fabric-samples/caps_proj/crypto-config/peerOrganizations/entertainment.reliance-network.com/ca/ca.entertainment.reliance-network.com-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.entertainment.reliance-network.com
+  ca.capital.reliance-network.com:
+    url: https://localhost:11054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: /home/rajat/ethApp/HyperLedger/workspace/fabric-samples/caps_proj/crypto-config/peerOrganizations/capital.reliance-network.com/ca/ca.capital.reliance-network.com-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.capital.reliance-network.com
