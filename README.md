@@ -1,3 +1,5 @@
+README file for composer chaincode is inside 'composer' directory
+
 There are scripts available for setting up the network.
 
 - To start the network: 
@@ -31,7 +33,7 @@ Composer setup CLIs
   composer card create -p "$CONNECTION_PROFILE" -u PeerAdmin -c "$CERT" -k "$PRIVATE_KEY" -r PeerAdmin -r ChannelAdmin -f "$CARDOUTPUT"
 
   *************************************************
-  **** Repease above steps (for creating cards, 21-31) for all the orgs, i.e. infrastructure, power, communications, entertainment & capital
+  **** Repease above steps (for creating cards, 21333) for all the orgs, i.e. infrastructure, power, communications, entertainment & capital
   *************************************************
 
   # Import the business network card for RelianceInfrastructure into the wallet
